@@ -12,7 +12,7 @@ from . import views
 app_name = 'catalog'
 
 urlpatterns = [
-    path('', views.ProductList.as_view(), name='product_lsit'),
+    path('', views.ProductList.as_view(), name='home'),
     path('contacts/', views.contacts, name='contacts'),
     path('products/<int:pk>/', views.ProductDetail.as_view(), name='products_detail'),
     path('product/create/', views.ProductCrearte.as_view(), name='product_create'),

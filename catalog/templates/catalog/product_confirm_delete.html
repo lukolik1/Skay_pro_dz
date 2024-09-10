@@ -5,13 +5,13 @@
         <div class="col-6">
             <form class="row" method="post" enctype="multipart/form-data">
                 <div class="card">
-                    <p class="card-text">Действительно хотите удалить  {{object.name}}</p>
+                    <p class="card-text">Действительно хотите удалить  {{object.name}}  ?</p>
                     <div class="card-body">
                         {% csrf_token %}
                     </div>
 
                     <button type="submit" class="btn btn-primary"> Удалить </button>
-                    <a class="btn btn-primary" href="{% url 'catalog:product_lsit' %}" role="button">Отмена</a>
+                    <a class="btn btn-primary" href="{% url 'catalog:home' %}" role="button">Отмена</a>
 
                 </div>
 

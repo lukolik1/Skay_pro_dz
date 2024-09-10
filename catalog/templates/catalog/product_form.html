@@ -1,33 +1,44 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
 <div class="container">
-    <div class="row">
+    <form class="row" method="post" enctype="multipart/form-data">
         <div class="col-6">
-            <form class="row" method="post" enctype="multipart/form-data">
-                <div class="card">
-                    <div class="card-body">
-                        {% csrf_token %}
-                        {{form.as_p}}
-
-
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">
-                        {%if object %}
-                            Сохранить
-                        {% else %}
-                            Создать
-                        {% endif %}
-
-                    </button>
-
+            <div class="card">
+                <h4 class="my-0 font-weight-normal">
+                    {% if object %}Редактировать Продукт{% else %}Создание Продукт{% endif %}
+                </h4>
+                <div class="card-body">
+                    {% csrf_token %}
+                    {{ form.as_p }}
                 </div>
-
-            </form>
-
+                <button type="submit" class="btn btn-primary">
+                    {% if object %}Сохранить{% else %}Создать{% endif %}
+                </button>
+            </div>
         </div>
-
-    </div>
-
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="my-0 font-weight-normal">Родитель Продукт</h4>
+                    {{ formset.management_form }}
+                    {% for form in formset.forms %}
+                        {{ form.as_p }}
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.non_field_errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 {% endblock %}
